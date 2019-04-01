@@ -551,8 +551,8 @@ Internet-Draft        DOTS Signal Control Filtering           April 2019
    successful operation.
 
    Once the attack is mitigated, the DOTS client may use the data
-   channel to retrieve its ACLs as maintained by the DOTS server.  As
-   shown in Figure 5, the activation type is set to 'deactivate' as set
+   channel to retrieve its ACLs maintained by the DOTS server.  As shown
+   in Figure 5, the activation type is set to 'deactivate' as set by the
 
 
 
@@ -562,8 +562,8 @@ Nishizuka, et al.        Expires October 3, 2019               [Page 10]
 Internet-Draft        DOTS Signal Control Filtering           April 2019
 
 
-   by the signal channel (Figure 4) instead of the type initially set
-   using the data channel (Figure 1).
+   signal channel (Figure 4) instead of the type initially set using the
+   data channel (Figure 1).
 
    {
      "ietf-dots-data-channel:acls": {

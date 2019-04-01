@@ -515,7 +515,7 @@ Content-Type: application/yang-data+json
             the successful operation.</t>
 
             <t>Once the attack is mitigated, the DOTS client may use the data
-            channel to retrieve its ACLs as maintained by the DOTS server. As
+            channel to retrieve its ACLs maintained by the DOTS server. As
             shown in <xref target="GET-2"></xref>, the activation type is set
             to 'deactivate' as set by the signal channel (<xref
             target="control"></xref>) instead of the type initially set using
