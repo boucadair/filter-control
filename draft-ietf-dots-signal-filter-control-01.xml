@@ -106,9 +106,9 @@
     <keyword>Filtering</keyword>
 
     <abstract>
-      <t>This document specifies an extension to the DOTS signal channel so
-      that DOTS clients can control their filtering rules when an attack
-      mitigation is active.</t>
+      <t>This document specifies an extension to the DOTS signal channel
+      protocol so that DOTS clients can control their filtering rules when an
+      attack mitigation is active.</t>
 
       <t>Particularly, this extension allows a DOTS client to activate or
       de-activate existing filtering rules during a DDoS attack. The
@@ -146,62 +146,63 @@
       <section anchor="problem" title="The Problem">
         <t>The DOTS data channel protocol <xref
         target="I-D.ietf-dots-data-channel"></xref> is used for bulk data
-        exchange between DOTS agents to improve the coordination of all the
-        parties involved in the response to the DDoS attack. Filter management
-        is one of its tasks which enables a DOTS client to retrieve the
-        filtering capabilities of a DOTS server and to manage filtering rules.
-        These Filtering rules are used for dropping or rate-limiting unwanted
-        traffic, and permitting accept-listed traffic.</t>
+        exchange between DOTS agents to improve the coordination of parties
+        involved in the response to the Distributed Denial-of-Service (DDoS)
+        attack. Filter management is one of its tasks which enables a DOTS
+        client to retrieve the filtering capabilities of a DOTS server and to
+        manage filtering rules. Typically, these Filtering rules are used for
+        dropping or rate-limiting unwanted traffic, and permitting
+        accept-listed traffic.</t>
 
-        <t>Unlike the DOTS signal channel <xref
+        <t>Unlike the DOTS signal channel protocol <xref
         target="I-D.ietf-dots-signal-channel"></xref>, the DOTS data channel
-        is not expected to deal with attack conditions. As such, an issue that
-        might be encountered in some deployments is when filters installed by
-        means of DOTS data channel protocol may not function as expected
-        during DDoS attacks or exacerbate an ongoing DDoS attack. The DOTS
-        data channel cannot be used then to change these filters, which may
-        complicate DDoS mitigation operations <xref
+        protocol is not expected to deal with attack conditions. As such, an
+        issue that might be encountered in some deployments is when filters
+        installed by means of the DOTS data channel protocol may not function
+        as expected during DDoS attacks or, worse, exacerbate an ongoing DDoS
+        attack. The DOTS data channel protocol cannot be used then to change
+        these filters, which may complicate DDoS mitigation operations <xref
         target="Interop"></xref>.</t>
 
         <t>A typical case is a DOTS client which configures during 'idle' time
-        (i.e., no mitigation is active) some filtering rules using DOTS data
-        channel to permit traffic from accept-listed sources, but during a
-        volumetric DDoS attack the DDoS mitigator identifies the source
-        addresses/prefixes in the accept-listed filtering rules are attacking
-        the target. For example, an attacker can spoof the IP addresses of
-        accept-listed sources to generate attack traffic or the attacker can
-        compromise the accept-listed sources and program them to launch a DDoS
-        attack.</t>
+        (i.e., no mitigation is active) some filtering rules using the DOTS
+        data channel protocol to permit traffic from accept-listed sources,
+        but during a volumetric DDoS attack the DDoS mitigator identifies the
+        source addresses/prefixes in the accept-listed filtering rules are
+        attacking the target. For example, an attacker can spoof the IP
+        addresses of accept-listed sources to generate attack traffic or the
+        attacker can compromise the accept-listed sources and program them to
+        launch a DDoS attack.</t>
 
         <t><xref target="I-D.ietf-dots-signal-channel"></xref> is designed so
         that the DDoS server notifies the conflict to the DOTS client (that
         is, 'conflict-cause' parameter set to 2 (Conflicts with an existing
         accept list)), but the DOTS client may not be able to withdraw the
         accept-list rules during the attack period due to the high-volume
-        attack traffic saturating the inbound link. In other words, the DOTS
-        client cannot use the DOTS data channel to withdraw the accept-list
-        filters when the DDoS attack is in progress. This assumes that this
-        DOTS client is the owner of the filtering rule.</t>
+        attack traffic saturating the inbound link to the DOTS client domain.
+        In other words, the DOTS client cannot use the DOTS data channel
+        protocol to withdraw the accept-list filters when a DDoS attack is in
+        progress. This assumes that this DOTS client is the owner of the
+        filtering rule.</t>
       </section>
 
       <section anchor="sol" title="The Solution">
         <t>This specification addresses the problems discussed in <xref
         target="problem"></xref> by adding the capability of managing
-        filtering rules using the DOTS signal channel, which enables a DOTS
-        client to request the activation or deactivation of filtering rules
-        during a DDoS attack.</t>
+        filtering rules using the DOTS signal channel protocol, which enables
+        a DOTS client to request the activation (or deactivation) of filtering
+        rules during a DDoS attack.</t>
 
-        <t>The DOTS signal channel protocol <xref
-        target="I-D.ietf-dots-signal-channel"></xref> is designed to enable a
-        DOTS client to contact a DOTS server for help even under severe
-        network congestion conditions. Therefore, extending the DOTS signal
-        channel protocol to manage the filtering rules during a attack will
-        enhance the protection capability offered by DOTS protocols.</t>
+        <t>The DOTS signal channel protocol is designed to enable a DOTS
+        client to contact a DOTS server for help even under severe network
+        congestion conditions. Therefore, extending the DOTS signal channel
+        protocol to manage the filtering rules during an attack will enhance
+        the protection capability offered by DOTS protocols.</t>
 
         <t><list style="empty">
             <t>Note: The experiment at the IETF103 hackathon <xref
-            target="Interop"></xref> showed that even when the incoming link
-            is saturated by DDoS attack traffic, the DOTS client can signal
+            target="Interop"></xref> showed that even when the inbound link is
+            saturated by DDoS attack traffic, the DOTS client can signal
             mitigation requests using the DOTS signal channel over the
             saturated link.</t>
           </list></t>
@@ -213,21 +214,22 @@
         <t>Sample examples are provided in <xref target="sample"></xref>, in
         particular: <list style="symbols">
             <t><xref target="sample1"></xref> illustrates how the filter
-            control extension is used when conflicts with ACLs are detected by
-            a DOTS server.</t>
+            control extension is used when conflicts with Access Control List
+            (ACLs) are detected and reported by a DOTS server.</t>
 
             <t><xref target="sample2"></xref> shows how a DOTS client can
             instruct a DOTS server to safely forward some specific traffic in
             'attack' time.</t>
 
             <t><xref target="sample3"></xref> shows how a DOTS client can
-            react if DDoS traffic is still being forwarded to the DOTS client
-            domain even if mitigation requests were sent to a DOTS server.</t>
+            react if the DDoS traffic is still being forwarded to the DOTS
+            client domain even if mitigation requests were sent to a DOTS
+            server.</t>
           </list></t>
       </section>
     </section>
 
-    <section anchor="notation" title="Notational Conventions and Terminology">
+    <section anchor="notation" title="Terminology">
       <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
       "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
       "OPTIONAL" in this document are to be interpreted as described in BCP 14
@@ -237,20 +239,22 @@
       <t>The reader should be familiar with the terms defined in <xref
       target="I-D.ietf-dots-requirements"></xref>.</t>
 
-      <t>The meaning of the symbols in tree diagrams is defined in <xref
-      target="RFC8340"></xref>.</t>
+      <t>The terminology for describing YANG modules is defined in <xref
+      target="RFC7950"></xref>. The meaning of the symbols in the tree diagram
+      is defined in <xref target="RFC8340"></xref>.</t>
     </section>
 
     <section title="Controlling Filtering Rules of a DOTS Client">
-      <section title="Binding the Data and Signal Channels">
+      <section anchor="bind" title="Binding DOTS Data and Signal Channels">
         <t>The filtering rules eventually managed using the DOTS signal
-        channel are created a priori by the same DOTS client using the DOTS
-        data channel. Managing conflicts with filters installed by other DOTS
-        clients of the same domain is out of scope.</t>
+        channel protocol are created a priori by the same DOTS client using
+        the DOTS data channel protocol. Managing conflicts with filters
+        installed by other DOTS clients of the same domain is out of
+        scope.</t>
 
         <t>As discussed in Section 4.4.1 of <xref
         target="I-D.ietf-dots-signal-channel"></xref>, a DOTS client must use
-        the same 'cuid' for both the signal and data channels. This
+        the same 'cuid' for both the DOTS signal and data channels. This
         requirement is meant to facilitate binding DOTS channels used by the
         same DOTS client.</t>
 
@@ -261,27 +265,28 @@
         a domain are assumed to have a mechanism to coordinate the mitigation
         requests, aliases, and filtering rules to coordinate their decisions
         for better mitigation operation efficiency. The exact details about
-        such mechanism is out of scope of this document.</t>
+        such mechanism is out of the scope of this document. </t>
 
         <t>A filtering rule controlled by the DOTS signal channel is
-        identified by its Access Control List (ACL) name (Section 7.2 of <xref
+        identified by its ACL name (Section 7.2 of <xref
         target="I-D.ietf-dots-data-channel"></xref>). Note that an ACL name
         unambiguously identifies an ACL bound to a DOTS client, but the same
         name may be used by distinct DOTS clients.</t>
 
-        <t>The activation or deactivation of an ACL by the signal channel
+        <t>The activation or deactivation of an ACL by the DOTS signal channel
         overrides the 'activation-type' (defined in Section 7.2 of <xref
         target="I-D.ietf-dots-data-channel"></xref>) a priori conveyed with
-        the filtering rules using the DOTS data channel.</t>
+        the filtering rules using the DOTS data channel protocol.</t>
       </section>
 
       <section title="DOTS Signal Channel Extension">
-        <section anchor="filtering" title="Parameters &amp; Behaviors">
+        <section anchor="filtering" title="Parameters and Behaviors">
           <t>This specification extends the mitigation request defined in
           Section 4.4.1 of <xref target="I-D.ietf-dots-signal-channel"></xref>
-          to convey the intended control of the configured filtering rules.
-          Concretely, the DOTS client conveys the following parameters in the
-          CBOR body of a mitigation request:<list style="hanging">
+          to convey the intended control of configured filtering rules.
+          Concretely, the DOTS client conveys 'acl-list' attribute with the
+          following sub-attributes in the CBOR body of a mitigation
+          request:<list style="hanging">
               <t hangText="acl-name:">A name of an access list defined using
               the DOTS data channel (Section 7.2 of <xref
               target="I-D.ietf-dots-data-channel"></xref>) that is associated
@@ -318,13 +323,15 @@
                 </figure></t>
             </list></t>
 
-          <t>A DOTS client may include acl-list and acl-name attributes in a
-          mitigation request having a new or an existing 'mid'. When acl-list
-          and acl-name attributes are to be included in a mitigation request
-          with an existing 'mid', the DOTS client MUST repeat all the other
-          parameters as sent in the original mitigation request (i.e., having
-          that 'mid') apart from a possible change to the lifetime parameter
-          value.</t>
+          <t>By default, ACL-related operations are achieved using the DOTS
+          data channel protocol when no attack is ongoing. During an attack
+          time, a DOTS client may include 'acl-list', 'acl-name', and
+          'activation-type' attributes in a mitigation request having a new or
+          an existing 'mid'. When such attributes are to be included in a
+          mitigation request with an existing 'mid', the DOTS client MUST
+          repeat all the other parameters as sent in the original mitigation
+          request (i.e., having that 'mid') apart from a possible change to
+          the lifetime parameter value.</t>
 
           <t>It is RECOMMENDED for a DOTS client to subscribe to asynchronous
           notifications of the attack mitigation, as detailed in Section
@@ -333,32 +340,35 @@
           target="I-D.ietf-dots-signal-channel"></xref> has to be followed by
           the DOTS client.</t>
 
-          <t>A DOTS client MUST NOT use the filtering control over DOTS signal
-          channel in 'idle' time; such requests MUST be discarded by the DOTS
-          server with 4.00 (Bad Request). By default, ACL-related operations
-          are achieved using the DOTS data channel <xref
-          target="I-D.ietf-dots-data-channel"></xref> when no attack is
-          ongoing.</t>
-
           <t>A DOTS client relies on the information received from the DOTS
           server and/or local information to the DOTS client domain to trigger
           a filter control request. Only filters that are pertinent for an
           ongoing mitigation should be controlled by a DOTS client using the
           DOTS signal channel.</t>
 
+          <t>The 'activation-type' is a comprehension-required parameter. The
+          'acl-list' and 'acl-name' parameters are defined as
+          comprehension-required parameters in Table 6 of <xref
+          target="I-D.ietf-dots-signal-channel"></xref>. Following the rules
+          in Section 6 of <xref target="I-D.ietf-dots-signal-channel"></xref>,
+          if the DOTS server does not understand the 'acl-list' or 'acl-name'
+          or 'activation-type' attributes, it responds with a "4.00 (Bad
+          Request)" error response code.</t>
+
           <t>If the DOTS server does not find the ACL name conveyed in the
-          mitigation request in its configuration data for this DOTS client,
-          it MUST respond with a "4.04 (Not Found)" error response code.</t>
+          mitigation request for this DOTS client, it MUST respond with 4.04
+          (Not Found) error response code.</t>
 
           <t>If the DOTS server finds the ACL name for this DOTS client, and
-          assuming the request passed the validation checks in <xref
-          target="I-D.ietf-dots-signal-channel"></xref>, the DOTS server MUST
-          proceed with the 'activation-type' update. The update is immediately
-          enforced by the DOTS server and will be maintained as the new
-          activation type for the ACL name even after the termination of the
-          mitigation request. In addition, the DOTS server MUST update the
-          lifetime of the corresponding ACL similar to the update when a
-          refresh request is received using the DOTS data channel.</t>
+          assuming the request passed the validation checks in Section 4.4.1
+          of <xref target="I-D.ietf-dots-signal-channel"></xref>, the DOTS
+          server MUST proceed with the 'activation-type' update. The update is
+          immediately enforced by the DOTS server and will be maintained as
+          the new activation type for the ACL name even after the termination
+          of the mitigation request. In addition, the DOTS server MUST update
+          the lifetime of the corresponding ACL similar to the update when a
+          refresh request is received using the DOTS data channel (Section 7.2
+          of <xref target="I-D.ietf-dots-data-channel"></xref>).</t>
 
           <t>If, during an active mitigation, the 'activation-type' is changed
           at the DOTS server (e.g., as a result of an external action) for an
@@ -368,6 +378,12 @@
           active mitigation) or in a response to a polling request (Section
           4.4.2.2 of <xref target="I-D.ietf-dots-signal-channel"></xref>).</t>
 
+          <t>If the DOTS signal and data channels maintained by a DOTS client
+          are not terminated on the same DOTS server of a DOTS server domain,
+          the above request processing operations are undertaken using the
+          coordination mechanism discussed in <xref target="bind"></xref>.
+          </t>
+
           <t>This specification does not require any modification to the
           efficacy update and the withdrawal procedures defined in <xref
           target="I-D.ietf-dots-signal-channel"></xref>. In particular,
@@ -376,7 +392,7 @@
         </section>
 
         <section anchor="YANG" title="DOTS Signal Filtering Control Module ">
-          <section title="Tree Structure">
+          <section anchor="tree" title="Tree Structure">
             <t>This document augments the "ietf-dots-signal-channel" DOTS
             signal YANG module defined in <xref
             target="I-D.ietf-dots-signal-channel"></xref> for managing
@@ -402,7 +418,7 @@
             target="I-D.ietf-dots-data-channel"></xref>.</t>
 
             <t><figure>
-                <artwork><![CDATA[<CODE BEGINS> file "ietf-dots-signal-control@2019-04-25.yang"
+                <artwork><![CDATA[<CODE BEGINS> file "ietf-dots-signal-control@2019-05-13.yang"
 
 module ietf-dots-signal-control {
   yang-version 1.1;
@@ -460,7 +476,7 @@ module ietf-dots-signal-control {
      This version of this YANG module is part of RFC XXXX; see
      the RFC itself for full legal notices.";
 
-  revision 2019-04-25 {
+  revision 2019-05-13 {
     description
       "Initial revision.";
     reference
@@ -485,9 +501,9 @@ module ietf-dots-signal-control {
     list acl-list {
       key "acl-name";
       description
-        "List of ACLs as defined in the DOTS data
-         channel.  These ACLs are uniquely defined by
-         cuid and name.";
+        "List of ACLs as defined using the DOTS data
+         channel. ACLs nound to a DOTS client are uniquely
+         identified by a name.";
       leaf acl-name {
         type leafref {
           path "/ietf-data:dots-data/ietf-data:dots-client" 
@@ -500,7 +516,7 @@ module ietf-dots-signal-control {
       type ietf-data:activation-type;
       default "activate-when-mitigating";
       description
-        "Set the activation type of an ACL.";
+        "Sets the activation type of an ACL.";
       }
     }   
   }
@@ -533,6 +549,7 @@ module ietf-dots-signal-control {
     /acl=an-accept-list HTTP/1.1
 Host: {host}:{port}
 Content-Type: application/yang-data+json
+
 {
   "ietf-dots-data-channel:acls": {
     "acl": [
@@ -582,6 +599,7 @@ Content-Type: application/yang-data+json
   Uri-Path: "cuid=paL8p4Zqo4SLv64TLPXrxA"
   Uri-Path: "mid=123"
   Content-Format: "application/dots+cbor"
+
   {
     "ietf-dots-signal-channel:mitigation-scope": {
       "scope": [
@@ -601,7 +619,8 @@ Content-Type: application/yang-data+json
           </figure></t>
 
         <t>The DOTS server accepts immediately the request by replying with
-        2.01 (Created) (<xref target="response"></xref>).</t>
+        2.01 (Created) (<xref target="response"></xref> depicts the message
+        body of the response).</t>
 
         <t><figure anchor="response" title="Status Response (Message Body)">
             <artwork align="left"><![CDATA[{
@@ -643,6 +662,7 @@ Content-Type: application/yang-data+json
   Uri-Path: "cuid=paL8p4Zqo4SLv64TLPXrxA"
   Uri-Path: "mid=123"
   Content-Format: "application/dots+cbor"
+
   {
     "ietf-dots-signal-channel:mitigation-scope": {
       "scope": [
@@ -734,6 +754,7 @@ Content-Type: application/yang-data+json
     /acl=my-accept-list HTTP/1.1
 Host: {host}:{port}
 Content-Type: application/yang-data+json
+
 {
   "ietf-dots-data-channel:acls": {
     "acl": [
@@ -780,6 +801,7 @@ Content-Type: application/yang-data+json
   Uri-Path: "cuid=ioiuLoZqo4SLv64TLPXrxA"
   Uri-Path: "mid=4879"
   Content-Format: "application/dots+cbor"
+
   {
     "ietf-dots-signal-channel:mitigation-scope": {
       "scope": [
@@ -827,6 +849,7 @@ Content-Type: application/yang-data+json
     /acl=my-ratelimit-list HTTP/1.1
 Host: {host}:{port}
 Content-Type: application/yang-data+json
+
 {
   "ietf-dots-data-channel:acls": {
     "acl": [
@@ -870,6 +893,7 @@ Content-Type: application/yang-data+json
   Uri-Path: "cuid=OopPisZqo4SLv64TLPXrxA"
   Uri-Path: "mid=85"
   Content-Format: "application/dots+cbor"
+
   {
     "ietf-dots-signal-channel:mitigation-scope": {
       "scope": [
@@ -902,6 +926,7 @@ Content-Type: application/yang-data+json
   Uri-Path: "cuid=OopPisZqo4SLv64TLPXrxA"
   Uri-Path: "mid=85"
   Content-Format: "application/dots+cbor"
+
   {
     "ietf-dots-signal-channel:mitigation-scope": {
       "scope": [
@@ -935,14 +960,7 @@ Content-Type: application/yang-data+json
         IANA "DOTS Signal Channel CBOR Key Values" registry established by
         <xref target="I-D.ietf-dots-signal-channel"></xref>.</t>
 
-        <t>The 'activation-type' is a comprehension-required parameter. The
-        'acl-list' and 'acl-name' parameters are defined as
-        comprehension-required parameters in Table 6 in <xref
-        target="I-D.ietf-dots-signal-channel"></xref>. Following the rules in
-        <xref target="I-D.ietf-dots-signal-channel"></xref>, if the DOTS
-        server does not understand the 'acl-list' or 'acl-name' or
-        'activation-type' attributes, it responds with a "4.00 (Bad Request)"
-        error response code.<list style="symbols">
+        <t><list style="symbols">
             <t>Note to the RFC Editor: Please delete (TBD1) once the CBOR key
             is assigned from the (0x0001 - 0x3FFF) range.</t>
           </list></t>
@@ -989,6 +1007,10 @@ Content-Type: application/yang-data+json
       target="I-D.ietf-dots-data-channel"></xref> need to be taken into
       account.</t>
 
+      <t>A DOTS client is entitled to access only to resources it creates. In
+      particular, a DOTS client can not tweak filtering rules created by other
+      DOTS clients of the same DOTS client domain.</t>
+
       <t>A compromised DOTS client can use the filtering control capability to
       exacerbate an ongoing attack. Likewise, such compromised DOTS client may
       abstain from reacting to an ACL conflict notification received from the
@@ -996,12 +1018,12 @@ Content-Type: application/yang-data+json
       variations of threats discussed in <xref
       target="I-D.ietf-dots-signal-channel"></xref> and <xref
       target="I-D.ietf-dots-data-channel"></xref>. DOTS operators should
-      carefully monitor and audit DOTS agents to detect misbehavior and to
-      deter misuse.</t>
+      carefully monitor and audit DOTS agents to detect misbehaviors and to
+      deter misuses.</t>
     </section>
 
     <section anchor="ack" title="Acknowledgements">
-      <t>Thank you to Takahiko Nagata, Wei Pan, Xia Liang, Jon Shallow, and
+      <t>Many thanks to Takahiko Nagata, Wei Pan, Xia Liang, Jon Shallow, and
       Dan Wing for the comments.</t>
     </section>
   </middle>
