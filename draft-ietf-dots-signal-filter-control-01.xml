@@ -347,18 +347,19 @@
           ongoing mitigation should be controlled by a DOTS client using the
           DOTS signal channel.</t>
 
-          <t>The 'activation-type' is a comprehension-required parameter. The
-          'acl-list' and 'acl-name' parameters are defined as
-          comprehension-required parameters in Table 6 of <xref
-          target="I-D.ietf-dots-signal-channel"></xref>. Following the rules
-          in Section 6 of <xref target="I-D.ietf-dots-signal-channel"></xref>,
-          if the DOTS server does not understand the 'acl-list' or 'acl-name'
-          or 'activation-type' attributes, it responds with a "4.00 (Bad
+          <t>As a reminder, the 'acl-list' and 'acl-name' parameters are
+          defined as comprehension-required parameters in Table 6 of <xref
+          target="I-D.ietf-dots-signal-channel"></xref>. Also, the
+          'activation-type' is defined as a comprehension-required parameter
+          (<xref target="map"></xref>). Following the rules in Section 6 of
+          <xref target="I-D.ietf-dots-signal-channel"></xref>, if the DOTS
+          server does not understand the 'acl-list' or 'acl-name' or
+          'activation-type' attributes, it responds with a "4.00 (Bad
           Request)" error response code.</t>
 
-          <t>If the DOTS server does not find the ACL name conveyed in the
-          mitigation request for this DOTS client, it MUST respond with 4.04
-          (Not Found) error response code.</t>
+          <t>If the DOTS server does not find the ACL name ('acl-name')
+          conveyed in the mitigation request for this DOTS client, it MUST
+          respond with 4.04 (Not Found) error response code.</t>
 
           <t>If the DOTS server finds the ACL name for this DOTS client, and
           assuming the request passed the validation checks in Section 4.4.1

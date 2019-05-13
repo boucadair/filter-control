@@ -371,21 +371,21 @@ Internet-Draft         DOTS Signal Filter Control               May 2019
    ongoing mitigation should be controlled by a DOTS client using the
    DOTS signal channel.
 
-   The 'activation-type' is a comprehension-required parameter.  The
-   'acl-list' and 'acl-name' parameters are defined as comprehension-
-   required parameters in Table 6 of [I-D.ietf-dots-signal-channel].
+   As a reminder, the 'acl-list' and 'acl-name' parameters are defined
+   as comprehension-required parameters in Table 6 of
+   [I-D.ietf-dots-signal-channel].  Also, the 'activation-type' is
+   defined as a comprehension-required parameter (Section 5.1).
    Following the rules in Section 6 of [I-D.ietf-dots-signal-channel],
    if the DOTS server does not understand the 'acl-list' or 'acl-name'
    or 'activation-type' attributes, it responds with a "4.00 (Bad
    Request)" error response code.
 
-   If the DOTS server does not find the ACL name conveyed in the
-   mitigation request for this DOTS client, it MUST respond with 4.04
-   (Not Found) error response code.
+   If the DOTS server does not find the ACL name ('acl-name') conveyed
+   in the mitigation request for this DOTS client, it MUST respond with
+   4.04 (Not Found) error response code.
 
    If the DOTS server finds the ACL name for this DOTS client, and
    assuming the request passed the validation checks in Section 4.4.1 of
-   [I-D.ietf-dots-signal-channel], the DOTS server MUST proceed with the
 
 
 
@@ -394,6 +394,7 @@ Nishizuka, et al.       Expires November 14, 2019               [Page 7]
 Internet-Draft         DOTS Signal Filter Control               May 2019
 
 
+   [I-D.ietf-dots-signal-channel], the DOTS server MUST proceed with the
    'activation-type' update.  The update is immediately enforced by the
    DOTS server and will be maintained as the new activation type for the
    ACL name even after the termination of the mitigation request.  In
@@ -439,7 +440,6 @@ Internet-Draft         DOTS Signal Filter Control               May 2019
           +--rw acl-name
           |    -> /ietf-data:dots-data/dots-client/acls/acl/name
           +--rw activation-type?   ietf-data:activation-type
-
 
 
 
