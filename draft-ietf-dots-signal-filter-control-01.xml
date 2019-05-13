@@ -285,8 +285,9 @@
           Section 4.4.1 of <xref target="I-D.ietf-dots-signal-channel"></xref>
           to convey the intended control of configured filtering rules.
           Concretely, the DOTS client conveys 'acl-list' attribute with the
-          following sub-attributes in the CBOR body of a mitigation
-          request:<list style="hanging">
+          following sub-attributes in the CBOR body of a mitigation request
+          (see the structure in <xref target="tree"></xref>):<list
+              style="hanging">
               <t hangText="acl-name:">A name of an access list defined using
               the DOTS data channel (Section 7.2 of <xref
               target="I-D.ietf-dots-data-channel"></xref>) that is associated

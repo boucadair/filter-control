@@ -290,7 +290,8 @@ Internet-Draft         DOTS Signal Filter Control               May 2019
    Section 4.4.1 of [I-D.ietf-dots-signal-channel] to convey the
    intended control of configured filtering rules.  Concretely, the DOTS
    client conveys 'acl-list' attribute with the following sub-attributes
-   in the CBOR body of a mitigation request:
+   in the CBOR body of a mitigation request (see the structure in
+   Section 3.2.2.1):
 
    acl-name:  A name of an access list defined using the DOTS data
       channel (Section 7.2 of [I-D.ietf-dots-data-channel]) that is
@@ -320,7 +321,6 @@ Internet-Draft         DOTS Signal Filter Control               May 2019
 
       The JSON/YANG mapping to CBOR for 'activation-type' is shown in
       Table 1.
-
 
 
 
