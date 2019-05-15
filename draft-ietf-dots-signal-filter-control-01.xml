@@ -341,7 +341,7 @@
           'acl-name', and 'activation-type' attributes in a mitigation
           request. This request may be the initial mitigation request for a
           given mitigation scope or a new one overriding an existing request.
-          In both case, a new 'mid' MUST be used. </t>
+          In both cases, a new 'mid' MUST be used. </t>
 
           <t>As the attack evolves, DOTS clients can adjust the
           'activation-type' of an ACL conveyed in a mitigation request or
