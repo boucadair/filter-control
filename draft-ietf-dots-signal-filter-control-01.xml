@@ -969,8 +969,12 @@ Content-Type: application/yang-data+json
         successful operation.</t>
 
         <t>As the attack mitigation evolves, the DOTS client may decide to
-        deactivate the rate-limit policy. It does so by sending the request
-        shown in <xref target="rateres2"></xref>.</t>
+        deactivate the rate-limit policy (e.g., upon receipt of notification
+        status change from 'attack-exceeded-capability' to
+        'attack-mitigation-in-progress'). Based on the mitigation status
+        conveyed by the DOTS server, the DOTS client can de-activate the
+        rate-limit action. ). It does so by sending the request shown in <xref
+        target="rateres2"></xref>.</t>
 
         <t><figure anchor="rateres2"
             title="DOTS Signal Channel Mitigation Request to Deactivate a Rate-Limit Filter">

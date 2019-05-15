@@ -1101,11 +1101,11 @@ Internet-Draft         DOTS Signal Filter Control               May 2019
    successful operation.
 
    As the attack mitigation evolves, the DOTS client may decide to
-   deactivate the rate-limit policy.  It does so by sending the request
-   shown in Figure 11.
-
-
-
+   deactivate the rate-limit policy (e.g., upon receipt of notification
+   status change from 'attack-exceeded-capability' to 'attack-
+   mitigation-in-progress').  Based on the mitigation status conveyed by
+   the DOTS server, the DOTS client can de-activate the rate-limit
+   action. ).  It does so by sending the request shown in Figure 11.
 
 
 
