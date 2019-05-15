@@ -5,12 +5,12 @@
 DOTS                                                        K. Nishizuka
 Internet-Draft                                        NTT Communications
 Intended status: Standards Track                            M. Boucadair
-Expires: November 14, 2019                                        Orange
+Expires: November 16, 2019                                        Orange
                                                                 T. Reddy
                                                                   McAfee
                                                                T. Nagata
                                                                  Lepidum
-                                                            May 13, 2019
+                                                            May 15, 2019
 
 
   Controlling Filtering Rules Using Distributed Denial-of-Service Open
@@ -53,7 +53,7 @@ Editorial Note (To be removed by RFC Editor)
 
 
 
-Nishizuka, et al.       Expires November 14, 2019               [Page 1]
+Nishizuka, et al.       Expires November 16, 2019               [Page 1]
 
 Internet-Draft         DOTS Signal Filter Control               May 2019
 
@@ -79,7 +79,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on November 14, 2019.
+   This Internet-Draft will expire on November 16, 2019.
 
 Copyright Notice
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Nishizuka, et al.       Expires November 14, 2019               [Page 2]
+Nishizuka, et al.       Expires November 16, 2019               [Page 2]
 
 Internet-Draft         DOTS Signal Filter Control               May 2019
 
@@ -121,15 +121,15 @@ Internet-Draft         DOTS Signal Filter Control               May 2019
      4.1.  Conflict Handling . . . . . . . . . . . . . . . . . . . .  11
      4.2.  On-Demand Activation of an Accept-List Filter . . . . . .  15
      4.3.  DOTS Servers/Mitigators Lacking Capacity  . . . . . . . .  17
-   5.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  20
-     5.1.  DOTS Signal Channel CBOR Mappings Registry  . . . . . . .  20
-     5.2.  DOTS Signal Filtering Control YANG Module . . . . . . . .  21
-   6.  Security Considerations . . . . . . . . . . . . . . . . . . .  21
-   7.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  22
-   8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  22
-     8.1.  Normative References  . . . . . . . . . . . . . . . . . .  22
-     8.2.  Informative References  . . . . . . . . . . . . . . . . .  22
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  23
+   5.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  21
+     5.1.  DOTS Signal Channel CBOR Mappings Registry  . . . . . . .  21
+     5.2.  DOTS Signal Filtering Control YANG Module . . . . . . . .  22
+   6.  Security Considerations . . . . . . . . . . . . . . . . . . .  22
+   7.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  23
+   8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  23
+     8.1.  Normative References  . . . . . . . . . . . . . . . . . .  23
+     8.2.  Informative References  . . . . . . . . . . . . . . . . .  23
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  24
 
 1.  Introduction
 
@@ -165,7 +165,7 @@ Internet-Draft         DOTS Signal Filter Control               May 2019
 
 
 
-Nishizuka, et al.       Expires November 14, 2019               [Page 3]
+Nishizuka, et al.       Expires November 16, 2019               [Page 3]
 
 Internet-Draft         DOTS Signal Filter Control               May 2019
 
@@ -221,7 +221,7 @@ Internet-Draft         DOTS Signal Filter Control               May 2019
 
 
 
-Nishizuka, et al.       Expires November 14, 2019               [Page 4]
+Nishizuka, et al.       Expires November 16, 2019               [Page 4]
 
 Internet-Draft         DOTS Signal Filter Control               May 2019
 
@@ -277,7 +277,7 @@ Internet-Draft         DOTS Signal Filter Control               May 2019
 
 
 
-Nishizuka, et al.       Expires November 14, 2019               [Page 5]
+Nishizuka, et al.       Expires November 16, 2019               [Page 5]
 
 Internet-Draft         DOTS Signal Filter Control               May 2019
 
@@ -333,7 +333,7 @@ Internet-Draft         DOTS Signal Filter Control               May 2019
 
 
 
-Nishizuka, et al.       Expires November 14, 2019               [Page 6]
+Nishizuka, et al.       Expires November 16, 2019               [Page 6]
 
 Internet-Draft         DOTS Signal Filter Control               May 2019
 
@@ -350,14 +350,21 @@ Internet-Draft         DOTS Signal Filter Control               May 2019
          Table 1: JSON/YANG mapping to CBOR for 'activation-type'
 
    By default, ACL-related operations are achieved using the DOTS data
-   channel protocol when no attack is ongoing.  During an attack time, a
-   DOTS client may include 'acl-list', 'acl-name', and 'activation-type'
-   attributes in a mitigation request having a new or an existing 'mid'.
-   When such attributes are to be included in a mitigation request with
-   an existing 'mid', the DOTS client MUST repeat all the other
-   parameters as sent in the original mitigation request (i.e., having
-   that 'mid') apart from a possible change to the lifetime parameter
-   value.
+   channel protocol when no attack is ongoing.  DOTS clients MUST NOT
+   use the filtering control over DOTS signal channel in 'idle' time;
+   such requests MUST be discarded by DOTS servers with 4.00 (Bad
+   Request).
+
+   During an attack time, DOTS clients may include 'acl-list', 'acl-
+   name', and 'activation-type' attributes in a mitigation request.
+   This request may be the initial mitigation request for a given
+   mitigation scope or a new one overriding an existing request.  In
+   both case, a new 'mid' MUST be used.
+
+   As the attack evolves, DOTS clients can adjust the 'activation-type'
+   of an ACL conveyed in a mitigation request or control other filters
+   as necessary.  This can be achieved by sending a PUT request with a
+   new 'mid' value.
 
    It is RECOMMENDED for a DOTS client to subscribe to asynchronous
    notifications of the attack mitigation, as detailed in
@@ -380,20 +387,19 @@ Internet-Draft         DOTS Signal Filter Control               May 2019
    or 'activation-type' attributes, it responds with a "4.00 (Bad
    Request)" error response code.
 
+
+
+Nishizuka, et al.       Expires November 16, 2019               [Page 7]
+
+Internet-Draft         DOTS Signal Filter Control               May 2019
+
+
    If the DOTS server does not find the ACL name ('acl-name') conveyed
    in the mitigation request for this DOTS client, it MUST respond with
    4.04 (Not Found) error response code.
 
    If the DOTS server finds the ACL name for this DOTS client, and
    assuming the request passed the validation checks in Section 4.4.1 of
-
-
-
-Nishizuka, et al.       Expires November 14, 2019               [Page 7]
-
-Internet-Draft         DOTS Signal Filter Control               May 2019
-
-
    [I-D.ietf-dots-signal-channel], the DOTS server MUST proceed with the
    'activation-type' update.  The update is immediately enforced by the
    DOTS server and will be maintained as the new activation type for the
@@ -411,10 +417,10 @@ Internet-Draft         DOTS Signal Filter Control               May 2019
    mitigation) or in a response to a polling request (Section 4.4.2.2 of
    [I-D.ietf-dots-signal-channel]).
 
-   If the DOTS signal and data channels of a DOTS client are established
-   with the same DOTS server of a DOTS server domain, the above request
-   processing operations are undertaken using the coordination mechanism
-   discussed in Section 3.1.
+   If the DOTS signal and data channels of a DOTS client are not
+   established with the same DOTS server of a DOTS server domain, the
+   above request processing operations are undertaken using the
+   coordination mechanism discussed in Section 3.1.
 
    This specification does not require any modification to the efficacy
    update and the withdrawal procedures defined in
@@ -433,6 +439,17 @@ Internet-Draft         DOTS Signal Filter Control               May 2019
    This document defines the YANG module "ietf-dots-signal-control",
    which has the following tree structure:
 
+
+
+
+
+
+
+Nishizuka, et al.       Expires November 16, 2019               [Page 8]
+
+Internet-Draft         DOTS Signal Filter Control               May 2019
+
+
    module: ietf-dots-signal-control
      augment /ietf-signal:dots-signal/ietf-signal:message-type
              /ietf-signal:mitigation-scope/ietf-signal:scope:
@@ -440,14 +457,6 @@ Internet-Draft         DOTS Signal Filter Control               May 2019
           +--rw acl-name
           |    -> /ietf-data:dots-data/dots-client/acls/acl/name
           +--rw activation-type?   ietf-data:activation-type
-
-
-
-
-
-Nishizuka, et al.       Expires November 14, 2019               [Page 8]
-
-Internet-Draft         DOTS Signal Filter Control               May 2019
 
 
 3.2.2.2.  YANG Module
@@ -490,6 +499,13 @@ Internet-Draft         DOTS Signal Filter Control               May 2019
         Author:  Kaname Nishizuka
                  <mailto:kaname@nttv6.jp>
 
+
+
+Nishizuka, et al.       Expires November 16, 2019               [Page 9]
+
+Internet-Draft         DOTS Signal Filter Control               May 2019
+
+
         Author:  Takahiko Nagata
                     <mailto:nagata@lepidum.co.jp>";
 
@@ -498,13 +514,6 @@ Internet-Draft         DOTS Signal Filter Control               May 2019
         messages exchanged between a DOTS client and a DOTS server
         to control, by means of the DOTS signal channel, filtering
         rules configured using the DOTS data channel.
-
-
-
-Nishizuka, et al.       Expires November 14, 2019               [Page 9]
-
-Internet-Draft         DOTS Signal Filter Control               May 2019
-
 
         Copyright (c) 2019 IETF Trust and the persons identified as
         authors of the code.  All rights reserved.
@@ -545,7 +554,15 @@ Internet-Draft         DOTS Signal Filter Control               May 2019
          key "acl-name";
          description
            "List of ACLs as defined using the DOTS data
-            channel. ACLs nound to a DOTS client are uniquely
+
+
+
+Nishizuka, et al.       Expires November 16, 2019              [Page 10]
+
+Internet-Draft         DOTS Signal Filter Control               May 2019
+
+
+            channel. ACLs bound to a DOTS client are uniquely
             identified by a name.";
          leaf acl-name {
            type leafref {
@@ -554,14 +571,6 @@ Internet-Draft         DOTS Signal Filter Control               May 2019
          }
          description
            "Reference to the ACL name bound to a DOTS client.";
-
-
-
-Nishizuka, et al.       Expires November 14, 2019              [Page 10]
-
-Internet-Draft         DOTS Signal Filter Control               May 2019
-
-
        }
        leaf activation-type {
          type ietf-data:activation-type;
@@ -604,16 +613,7 @@ Internet-Draft         DOTS Signal Filter Control               May 2019
 
 
 
-
-
-
-
-
-
-
-
-
-Nishizuka, et al.       Expires November 14, 2019              [Page 11]
+Nishizuka, et al.       Expires November 16, 2019              [Page 11]
 
 Internet-Draft         DOTS Signal Filter Control               May 2019
 
@@ -669,7 +669,7 @@ Internet-Draft         DOTS Signal Filter Control               May 2019
 
 
 
-Nishizuka, et al.       Expires November 14, 2019              [Page 12]
+Nishizuka, et al.       Expires November 16, 2019              [Page 12]
 
 Internet-Draft         DOTS Signal Filter Control               May 2019
 
@@ -725,7 +725,7 @@ Internet-Draft         DOTS Signal Filter Control               May 2019
 
 
 
-Nishizuka, et al.       Expires November 14, 2019              [Page 13]
+Nishizuka, et al.       Expires November 16, 2019              [Page 13]
 
 Internet-Draft         DOTS Signal Filter Control               May 2019
 
@@ -747,7 +747,7 @@ Internet-Draft         DOTS Signal Filter Control               May 2019
      Uri-Path: "dots"
      Uri-Path: "mitigate"
      Uri-Path: "cuid=paL8p4Zqo4SLv64TLPXrxA"
-     Uri-Path: "mid=123"
+     Uri-Path: "mid=124"
      Content-Format: "application/dots+cbor"
 
      {
@@ -781,7 +781,7 @@ Internet-Draft         DOTS Signal Filter Control               May 2019
 
 
 
-Nishizuka, et al.       Expires November 14, 2019              [Page 14]
+Nishizuka, et al.       Expires November 16, 2019              [Page 14]
 
 Internet-Draft         DOTS Signal Filter Control               May 2019
 
@@ -837,7 +837,7 @@ Internet-Draft         DOTS Signal Filter Control               May 2019
 
 
 
-Nishizuka, et al.       Expires November 14, 2019              [Page 15]
+Nishizuka, et al.       Expires November 16, 2019              [Page 15]
 
 Internet-Draft         DOTS Signal Filter Control               May 2019
 
@@ -893,7 +893,7 @@ Internet-Draft         DOTS Signal Filter Control               May 2019
 
 
 
-Nishizuka, et al.       Expires November 14, 2019              [Page 16]
+Nishizuka, et al.       Expires November 16, 2019              [Page 16]
 
 Internet-Draft         DOTS Signal Filter Control               May 2019
 
@@ -949,7 +949,7 @@ Internet-Draft         DOTS Signal Filter Control               May 2019
 
 
 
-Nishizuka, et al.       Expires November 14, 2019              [Page 17]
+Nishizuka, et al.       Expires November 16, 2019              [Page 17]
 
 Internet-Draft         DOTS Signal Filter Control               May 2019
 
@@ -1005,7 +1005,7 @@ Internet-Draft         DOTS Signal Filter Control               May 2019
 
 
 
-Nishizuka, et al.       Expires November 14, 2019              [Page 18]
+Nishizuka, et al.       Expires November 16, 2019              [Page 18]
 
 Internet-Draft         DOTS Signal Filter Control               May 2019
 
@@ -1061,7 +1061,7 @@ Internet-Draft         DOTS Signal Filter Control               May 2019
 
 
 
-Nishizuka, et al.       Expires November 14, 2019              [Page 19]
+Nishizuka, et al.       Expires November 16, 2019              [Page 19]
 
 Internet-Draft         DOTS Signal Filter Control               May 2019
 
@@ -1071,7 +1071,7 @@ Internet-Draft         DOTS Signal Filter Control               May 2019
      Uri-Path: "dots"
      Uri-Path: "mitigate"
      Uri-Path: "cuid=OopPisZqo4SLv64TLPXrxA"
-     Uri-Path: "mid=85"
+     Uri-Path: "mid=86"
      Content-Format: "application/dots+cbor"
 
      {
@@ -1084,7 +1084,7 @@ Internet-Draft         DOTS Signal Filter Control               May 2019
               "acl-list": [
                 {
                   "acl-name": "my-ratelimit-list",
-                  "activation-type": "activate"
+                  "activation-type": "immediate"
                 }
               ]
              "lifetime": 3600
@@ -1099,6 +1099,58 @@ Internet-Draft         DOTS Signal Filter Control               May 2019
    Then, the DOTS server activates "my-ratelimit-list" ACL and replies
    with 2.04 (Changed) response to the DOTS client to confirm the
    successful operation.
+
+   As the attack mitigation evolves, the DOTS client may decide to
+   deactivate the rate-limit policy.  It does so by sending the request
+   shown in Figure 11.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Nishizuka, et al.       Expires November 16, 2019              [Page 20]
+
+Internet-Draft         DOTS Signal Filter Control               May 2019
+
+
+     Header: PUT (Code=0.03)
+     Uri-Path: ".well-known"
+     Uri-Path: "dots"
+     Uri-Path: "mitigate"
+     Uri-Path: "cuid=OopPisZqo4SLv64TLPXrxA"
+     Uri-Path: "mid=87"
+     Content-Format: "application/dots+cbor"
+
+     {
+       "ietf-dots-signal-channel:mitigation-scope": {
+         "scope": [
+           {
+             "target-prefix": [
+                "2001:db8:123::/48"
+              ],
+              "acl-list": [
+                {
+                  "acl-name": "my-ratelimit-list",
+                  "activation-type": "deactivate"
+                }
+              ]
+             "lifetime": 3600
+           }
+         ]
+       }
+     }
+
+     Figure 11: DOTS Signal Channel Mitigation Request to Deactivate a
+                             Rate-Limit Filter
 
 5.  IANA Considerations
 
@@ -1117,7 +1169,11 @@ Internet-Draft         DOTS Signal Filter Control               May 2019
 
 
 
-Nishizuka, et al.       Expires November 14, 2019              [Page 20]
+
+
+
+
+Nishizuka, et al.       Expires November 16, 2019              [Page 21]
 
 Internet-Draft         DOTS Signal Filter Control               May 2019
 
@@ -1173,7 +1229,7 @@ Internet-Draft         DOTS Signal Filter Control               May 2019
 
 
 
-Nishizuka, et al.       Expires November 14, 2019              [Page 21]
+Nishizuka, et al.       Expires November 16, 2019              [Page 22]
 
 Internet-Draft         DOTS Signal Filter Control               May 2019
 
@@ -1229,7 +1285,7 @@ Internet-Draft         DOTS Signal Filter Control               May 2019
 
 
 
-Nishizuka, et al.       Expires November 14, 2019              [Page 22]
+Nishizuka, et al.       Expires November 16, 2019              [Page 23]
 
 Internet-Draft         DOTS Signal Filter Control               May 2019
 
@@ -1285,4 +1341,4 @@ Authors' Addresses
 
 
 
-Nishizuka, et al.       Expires November 14, 2019              [Page 23]
+Nishizuka, et al.       Expires November 16, 2019              [Page 24]

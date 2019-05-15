@@ -332,14 +332,21 @@
             </list></t>
 
           <t>By default, ACL-related operations are achieved using the DOTS
-          data channel protocol when no attack is ongoing. During an attack
-          time, a DOTS client may include 'acl-list', 'acl-name', and
-          'activation-type' attributes in a mitigation request having a new or
-          an existing 'mid'. When such attributes are to be included in a
-          mitigation request with an existing 'mid', the DOTS client MUST
-          repeat all the other parameters as sent in the original mitigation
-          request (i.e., having that 'mid') apart from a possible change to
-          the lifetime parameter value.</t>
+          data channel protocol when no attack is ongoing. DOTS clients MUST
+          NOT use the filtering control over DOTS signal channel in 'idle'
+          time; such requests MUST be discarded by DOTS servers with 4.00 (Bad
+          Request). </t>
+
+          <t>During an attack time, DOTS clients may include 'acl-list',
+          'acl-name', and 'activation-type' attributes in a mitigation
+          request. This request may be the initial mitigation request for a
+          given mitigation scope or a new one overriding an existing request.
+          In both case, a new 'mid' MUST be used. </t>
+
+          <t>As the attack evolves, DOTS clients can adjust the
+          'activation-type' of an ACL conveyed in a mitigation request or
+          control other filters as necessary. This can be achieved by sending
+          a PUT request with a new 'mid' value.</t>
 
           <t>It is RECOMMENDED for a DOTS client to subscribe to asynchronous
           notifications of the attack mitigation, as detailed in Section
@@ -387,7 +394,7 @@
           active mitigation) or in a response to a polling request (Section
           4.4.2.2 of <xref target="I-D.ietf-dots-signal-channel"></xref>).</t>
 
-          <t>If the DOTS signal and data channels of a DOTS client are
+          <t>If the DOTS signal and data channels of a DOTS client are not
           established with the same DOTS server of a DOTS server domain, the
           above request processing operations are undertaken using the
           coordination mechanism discussed in <xref target="bind"></xref>.
@@ -511,7 +518,7 @@ module ietf-dots-signal-control {
       key "acl-name";
       description
         "List of ACLs as defined using the DOTS data
-         channel. ACLs nound to a DOTS client are uniquely
+         channel. ACLs bound to a DOTS client are uniquely
          identified by a name.";
       leaf acl-name {
         type leafref {
@@ -669,7 +676,7 @@ Content-Type: application/yang-data+json
   Uri-Path: "dots"
   Uri-Path: "mitigate"
   Uri-Path: "cuid=paL8p4Zqo4SLv64TLPXrxA"
-  Uri-Path: "mid=123"
+  Uri-Path: "mid=124"
   Content-Format: "application/dots+cbor"
 
   {
@@ -933,7 +940,7 @@ Content-Type: application/yang-data+json
   Uri-Path: "dots"
   Uri-Path: "mitigate"
   Uri-Path: "cuid=OopPisZqo4SLv64TLPXrxA"
-  Uri-Path: "mid=85"
+  Uri-Path: "mid=86"
   Content-Format: "application/dots+cbor"
 
   {
@@ -946,7 +953,7 @@ Content-Type: application/yang-data+json
            "acl-list": [
              {
                "acl-name": "my-ratelimit-list", 
-               "activation-type": "activate"
+               "activation-type": "immediate"
              }
            ]
           "lifetime": 3600
@@ -960,6 +967,41 @@ Content-Type: application/yang-data+json
         <t>Then, the DOTS server activates "my-ratelimit-list" ACL and replies
         with 2.04 (Changed) response to the DOTS client to confirm the
         successful operation.</t>
+
+        <t>As the attack mitigation evolves, the DOTS client may decide to
+        deactivate the rate-limit policy. It does so by sending the request
+        shown in <xref target="rateres2"></xref>.</t>
+
+        <t><figure anchor="rateres2"
+            title="DOTS Signal Channel Mitigation Request to Deactivate a Rate-Limit Filter">
+            <artwork><![CDATA[  Header: PUT (Code=0.03)
+  Uri-Path: ".well-known"
+  Uri-Path: "dots"
+  Uri-Path: "mitigate"
+  Uri-Path: "cuid=OopPisZqo4SLv64TLPXrxA"
+  Uri-Path: "mid=87"
+  Content-Format: "application/dots+cbor"
+
+  {
+    "ietf-dots-signal-channel:mitigation-scope": {
+      "scope": [
+        {
+          "target-prefix": [
+             "2001:db8:123::/48"
+           ],   
+           "acl-list": [
+             {
+               "acl-name": "my-ratelimit-list", 
+               "activation-type": "deactivate"
+             }
+           ]
+          "lifetime": 3600
+        }
+      ]
+    }
+  }
+]]></artwork>
+          </figure></t>
       </section>
     </section>
 
