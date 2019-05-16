@@ -116,7 +116,7 @@ Internet-Draft         DOTS Signal Filter Control               May 2019
 
        3.2.2.  DOTS Signal Filtering Control Module  . . . . . . . .   9
          3.2.2.1.  Tree Structure  . . . . . . . . . . . . . . . . .   9
-         3.2.2.2.  YANG Module . . . . . . . . . . . . . . . . . . .   9
+         3.2.2.2.  YANG Module . . . . . . . . . . . . . . . . . . .  10
    4.  Sample Examples . . . . . . . . . . . . . . . . . . . . . . .  12
      4.1.  Conflict Handling . . . . . . . . . . . . . . . . . . . .  12
      4.2.  On-Demand Activation of an Accept-List Filter . . . . . .  16
@@ -438,10 +438,10 @@ Internet-Draft         DOTS Signal Filter Control               May 2019
    Figure 1: Example of a Diagnostic Payload Including Failed ACL Update
 
    If the DOTS client receives a 5.03 (Service Unavailable) with a
-   diagnostic payload indicating a failed ACL update, the DOTS client
-   MUST immediately send a new request which repeats all the parameters
-   as sent in the failed mitigation request but without including the
-   ACL attributes.  After the expiry of Max-Age returned in the 5.03
+   diagnostic payload indicating a failed ACL update as a response to an
+   initial mitigation or a mitigation with adjusted scope, the DOTS
+   client MUST immediately send a new request which repeats all the
+   parameters as sent in the failed mitigation request but without
 
 
 
@@ -450,9 +450,10 @@ Nishizuka, et al.       Expires November 17, 2019               [Page 8]
 Internet-Draft         DOTS Signal Filter Control               May 2019
 
 
-   (Service Unavailable) response, the DOTS client retries with a new
-   mitigation request (i.e., a new 'mid') that repeats all the
-   parameters as sent in the failed mitigation request.
+   including the ACL attributes.  After the expiry of Max-Age returned
+   in the 5.03 (Service Unavailable) response, the DOTS client retries
+   with a new mitigation request (i.e., a new 'mid') that repeats all
+   the parameters as sent in the failed mitigation request.
 
    If, during an active mitigation, the 'activation-type' is changed at
    the DOTS server (e.g., as a result of an external action) for an ACL
@@ -493,11 +494,10 @@ Internet-Draft         DOTS Signal Filter Control               May 2019
           +--rw activation-type?   ietf-data:activation-type
 
 
-3.2.2.2.  YANG Module
 
-   This module uses types defined in [I-D.ietf-dots-data-channel].
 
-   <CODE BEGINS> file "ietf-dots-signal-control@2019-05-13.yang"
+
+
 
 
 
@@ -505,6 +505,12 @@ Nishizuka, et al.       Expires November 17, 2019               [Page 9]
 
 Internet-Draft         DOTS Signal Filter Control               May 2019
 
+
+3.2.2.2.  YANG Module
+
+   This module uses types defined in [I-D.ietf-dots-data-channel].
+
+   <CODE BEGINS> file "ietf-dots-signal-control@2019-05-13.yang"
 
    module ietf-dots-signal-control {
      yang-version 1.1;
@@ -549,12 +555,6 @@ Internet-Draft         DOTS Signal Filter Control               May 2019
         to control, by means of the DOTS signal channel, filtering
         rules configured using the DOTS data channel.
 
-        Copyright (c) 2019 IETF Trust and the persons identified as
-        authors of the code.  All rights reserved.
-
-        Redistribution and use in source and binary forms, with or
-        without modification, is permitted pursuant to, and subject
-
 
 
 Nishizuka, et al.       Expires November 17, 2019              [Page 10]
@@ -562,6 +562,11 @@ Nishizuka, et al.       Expires November 17, 2019              [Page 10]
 Internet-Draft         DOTS Signal Filter Control               May 2019
 
 
+        Copyright (c) 2019 IETF Trust and the persons identified as
+        authors of the code.  All rights reserved.
+
+        Redistribution and use in source and binary forms, with or
+        without modification, is permitted pursuant to, and subject
         to the license terms contained in, the Simplified BSD License
         set forth in Section 4.c of the IETF Trust's Legal Provisions
         Relating to IETF Documents
@@ -605,11 +610,6 @@ Internet-Draft         DOTS Signal Filter Control               May 2019
          }
          description
            "Reference to the ACL name bound to a DOTS client.";
-       }
-       leaf activation-type {
-         type ietf-data:activation-type;
-         default "activate-when-mitigating";
-         description
 
 
 
@@ -618,6 +618,11 @@ Nishizuka, et al.       Expires November 17, 2019              [Page 11]
 Internet-Draft         DOTS Signal Filter Control               May 2019
 
 
+       }
+       leaf activation-type {
+         type ietf-data:activation-type;
+         default "activate-when-mitigating";
+         description
            "Sets the activation type of an ACL.";
          }
        }
@@ -639,11 +644,6 @@ Internet-Draft         DOTS Signal Filter Control               May 2019
    from 2001:db8:1234::/48 with a destination port number 443 to be
    forwarded to 2001:db8:6401::2/127.  It does so by sending, for
    example, a PUT request shown in Figure 2.
-
-
-
-
-
 
 
 

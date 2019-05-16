@@ -415,13 +415,14 @@
             </figure></t>
 
           <t>If the DOTS client receives a 5.03 (Service Unavailable) with a
-          diagnostic payload indicating a failed ACL update, the DOTS client
-          MUST immediately send a new request which repeats all the parameters
-          as sent in the failed mitigation request but without including the
-          ACL attributes. After the expiry of Max-Age returned in the 5.03
-          (Service Unavailable) response, the DOTS client retries with a new
-          mitigation request (i.e., a new 'mid') that repeats all the
-          parameters as sent in the failed mitigation request.</t>
+          diagnostic payload indicating a failed ACL update as a response to
+          an initial mitigation or a mitigation with adjusted scope, the DOTS
+          client MUST immediately send a new request which repeats all the
+          parameters as sent in the failed mitigation request but without
+          including the ACL attributes. After the expiry of Max-Age returned
+          in the 5.03 (Service Unavailable) response, the DOTS client retries
+          with a new mitigation request (i.e., a new 'mid') that repeats all
+          the parameters as sent in the failed mitigation request.</t>
 
           <t>If, during an active mitigation, the 'activation-type' is changed
           at the DOTS server (e.g., as a result of an external action) for an
