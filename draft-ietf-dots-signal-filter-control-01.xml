@@ -212,7 +212,7 @@
         specification.</t>
 
         <t>An augment to the DOTS signal channel YANG module is defined in
-        <xref target="YANG"></xref>. </t>
+        <xref target="YANG"></xref>.</t>
 
         <t>Sample examples are provided in <xref target="sample"></xref>, in
         particular: <list style="symbols">
@@ -231,8 +231,7 @@
           </list></t>
 
         <t>The JavaScript Object Notation (JSON) encoding of YANG-modeled data
-        <xref target="RFC7951"></xref> is used to illustrate the examples.
-        </t>
+        <xref target="RFC7951"></xref> is used to illustrate the examples.</t>
       </section>
     </section>
 
@@ -272,7 +271,7 @@
         a domain are assumed to have a mechanism to coordinate the mitigation
         requests, aliases, and filtering rules to coordinate their decisions
         for better mitigation operation efficiency. The exact details about
-        such mechanism is out of the scope of this document. </t>
+        such mechanism is out of the scope of this document.</t>
 
         <t>A filtering rule controlled by the DOTS signal channel is
         identified by its ACL name (Section 7.2 of <xref
@@ -335,13 +334,16 @@
           data channel protocol when no attack is ongoing. DOTS clients MUST
           NOT use the filtering control over DOTS signal channel in 'idle'
           time; such requests MUST be discarded by DOTS servers with 4.00 (Bad
-          Request). </t>
+          Request).</t>
 
           <t>During an attack time, DOTS clients may include 'acl-list',
           'acl-name', and 'activation-type' attributes in a mitigation
           request. This request may be the initial mitigation request for a
           given mitigation scope or a new one overriding an existing request.
-          In both cases, a new 'mid' MUST be used. </t>
+          In both cases, a new 'mid' MUST be used. Nevertheless, it is NOT
+          RECOMMENDED to include ACL attributes in an initial mitigation
+          request for a given mitigation scope or in a mitigation request
+          adjusting the mitigation scope.</t>
 
           <t>As the attack evolves, DOTS clients can adjust the
           'activation-type' of an ACL conveyed in a mitigation request or
@@ -384,7 +386,42 @@
           of the mitigation request. In addition, the DOTS server MUST update
           the lifetime of the corresponding ACL similar to the update when a
           refresh request is received using the DOTS data channel (Section 7.2
-          of <xref target="I-D.ietf-dots-data-channel"></xref>).</t>
+          of <xref target="I-D.ietf-dots-data-channel"></xref>). If, for some
+          reason, the DOTS server fails to apply the filter update, it MUST
+          respond with 5.03 (Service Unavailable) error response code and
+          include the failed ACL update in the diagnostic payload of the
+          response (an example is shown in <xref target="diag"></xref>). Else,
+          the DOTS server replies with the appropriate response code defined
+          in Section 4.4.1 of <xref
+          target="I-D.ietf-dots-signal-channel"></xref>.</t>
+
+          <t><figure align="center" anchor="diag"
+              title="Example of a Diagnostic Payload Including Failed ACL Update">
+              <artwork><![CDATA[{
+  "ietf-dots-signal-channel:mitigation-scope": {
+    "scope": [
+      {
+        "mid": 123,
+        "ietf-dots-signal-control:acl-list": [
+          {
+            "ietf-dots-signal-control:acl-name": "an-accept-list", 
+            "ietf-dots-signal-control:activation-type": "deactivate"
+          }
+        ]
+      }
+    ]
+  }
+}]]></artwork>
+            </figure></t>
+
+          <t>If the DOTS client receives a 5.03 (Service Unavailable) with a
+          diagnostic payload indicating a failed ACL update, the DOTS client
+          MUST immediately send a new request which repeats all the parameters
+          as sent in the failed mitigation request but without including the
+          ACL attributes. After the expiry of Max-Age returned in the 5.03
+          (Service Unavailable) response, the DOTS client retries with a new
+          mitigation request (i.e., a new 'mid') that repeats all the
+          parameters as sent in the failed mitigation request.</t>
 
           <t>If, during an active mitigation, the 'activation-type' is changed
           at the DOTS server (e.g., as a result of an external action) for an
@@ -397,8 +434,7 @@
           <t>If the DOTS signal and data channels of a DOTS client are not
           established with the same DOTS server of a DOTS server domain, the
           above request processing operations are undertaken using the
-          coordination mechanism discussed in <xref target="bind"></xref>.
-          </t>
+          coordination mechanism discussed in <xref target="bind"></xref>.</t>
 
           <t>This specification does not require any modification to the
           efficacy update and the withdrawal procedures defined in <xref
@@ -689,10 +725,10 @@ Content-Type: application/yang-data+json
            "target-protocol": [
              17
            ],
-           "acl-list": [
+           "ietf-dots-signal-control:acl-list": [
              {
-               "acl-name": "an-accept-list", 
-               "activation-type": "deactivate"
+               "ietf-dots-signal-control:acl-name": "an-accept-list", 
+               "ietf-dots-signal-control:activation-type": "deactivate"
              }
            ]
           "lifetime": 3600
@@ -828,10 +864,10 @@ Content-Type: application/yang-data+json
            "target-protocol": [
              17
            ],
-           "acl-list": [
+           "ietf-dots-signal-control:acl-list": [
              {
-               "acl-name": "my-accept-list", 
-               "activation-type": "immediate"
+               "ietf-dots-signal-control:acl-name": "my-accept-list", 
+               "ietf-dots-signal-control:activation-type": "immediate"
              }
           "lifetime": 3600
         }
@@ -950,10 +986,10 @@ Content-Type: application/yang-data+json
           "target-prefix": [
              "2001:db8:123::/48"
            ],   
-           "acl-list": [
+           "ietf-dots-signal-control:acl-list": [
              {
-               "acl-name": "my-ratelimit-list", 
-               "activation-type": "immediate"
+               "ietf-dots-signal-control:acl-name": "my-ratelimit-list", 
+               "ietf-dots-signal-control:activation-type": "immediate"
              }
            ]
           "lifetime": 3600
@@ -993,10 +1029,10 @@ Content-Type: application/yang-data+json
           "target-prefix": [
              "2001:db8:123::/48"
            ],   
-           "acl-list": [
+           "ietf-dots-signal-control:acl-list": [
              {
-               "acl-name": "my-ratelimit-list", 
-               "activation-type": "deactivate"
+               "ietf-dots-signal-control:acl-name": "my-ratelimit-list", 
+               "ietf-dots-signal-control:activation-type": "deactivate"
              }
            ]
           "lifetime": 3600
