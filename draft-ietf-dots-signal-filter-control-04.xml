@@ -918,7 +918,7 @@ Content-Type: application/yang-data+json
         <t>Consider a DOTS client that contacts its DOTS server during 'idle'
         time to install an accept-list that rate-limits all (or a part
         thereof) traffic to be forwarded to 2001:db8:123::/48 as a last resort
-        countermeasure whenever required. Installing the accpe-list can be
+        countermeasure whenever required. Installing the accept-list can be
         done by sending, for example, the PUT request shown in <xref
         target="rate"></xref>. The DOTS server installs this filter with a
         "deactivated" state.</t>

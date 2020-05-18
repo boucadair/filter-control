@@ -1066,7 +1066,7 @@ Nishizuka, et al.       Expires November 19, 2020              [Page 19]
 Internet-Draft         DOTS Signal Filter Control               May 2020
 
 
-   resort countermeasure whenever required.  Installing the accpe-list
+   resort countermeasure whenever required.  Installing the accept-list
    can be done by sending, for example, the PUT request shown in
    Figure 9.  The DOTS server installs this filter with a "deactivated"
    state.
