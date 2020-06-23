@@ -1097,8 +1097,8 @@ Content-Format: "application/dots+cbor"
     <section anchor="IANA" title="IANA Considerations">
       <section anchor="map" title="DOTS Signal Channel CBOR Mappings Registry">
         <t>This specification registers the following parameters in the IANA
-        "DOTS Signal Channel CBOR Key Values" registry established by <xref
-        target="RFC8782"></xref> (<xref target="Key-Map"></xref>).</t>
+        "DOTS Signal Channel CBOR Key Values" registry <xref
+        target="Key-Map"></xref>.</t>
 
         <t><list style="symbols">
             <t>Note to the RFC Editor: Please delete (TBA1-TBA2-TBA3) once the
