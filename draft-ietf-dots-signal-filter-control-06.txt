@@ -5,12 +5,12 @@
 DOTS                                                        K. Nishizuka
 Internet-Draft                                        NTT Communications
 Intended status: Standards Track                            M. Boucadair
-Expires: December 23, 2020                                        Orange
+Expires: December 24, 2020                                        Orange
                                                                 T. Reddy
                                                                   McAfee
                                                                T. Nagata
                                                                  Lepidum
-                                                           June 21, 2020
+                                                           June 22, 2020
 
 
   Controlling Filtering Rules Using Distributed Denial-of-Service Open
@@ -53,7 +53,7 @@ Editorial Note (To be removed by RFC Editor)
 
 
 
-Nishizuka, et al.       Expires December 23, 2020               [Page 1]
+Nishizuka, et al.       Expires December 24, 2020               [Page 1]
 
 Internet-Draft         DOTS Signal Filter Control              June 2020
 
@@ -73,7 +73,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on December 23, 2020.
+   This Internet-Draft will expire on December 24, 2020.
 
 Copyright Notice
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Nishizuka, et al.       Expires December 23, 2020               [Page 2]
+Nishizuka, et al.       Expires December 24, 2020               [Page 2]
 
 Internet-Draft         DOTS Signal Filter Control              June 2020
 
@@ -165,7 +165,7 @@ Internet-Draft         DOTS Signal Filter Control              June 2020
 
 
 
-Nishizuka, et al.       Expires December 23, 2020               [Page 3]
+Nishizuka, et al.       Expires December 24, 2020               [Page 3]
 
 Internet-Draft         DOTS Signal Filter Control              June 2020
 
@@ -221,7 +221,7 @@ Internet-Draft         DOTS Signal Filter Control              June 2020
 
 
 
-Nishizuka, et al.       Expires December 23, 2020               [Page 4]
+Nishizuka, et al.       Expires December 24, 2020               [Page 4]
 
 Internet-Draft         DOTS Signal Filter Control              June 2020
 
@@ -277,7 +277,7 @@ Internet-Draft         DOTS Signal Filter Control              June 2020
 
 
 
-Nishizuka, et al.       Expires December 23, 2020               [Page 5]
+Nishizuka, et al.       Expires December 24, 2020               [Page 5]
 
 Internet-Draft         DOTS Signal Filter Control              June 2020
 
@@ -333,7 +333,7 @@ Internet-Draft         DOTS Signal Filter Control              June 2020
 
 
 
-Nishizuka, et al.       Expires December 23, 2020               [Page 6]
+Nishizuka, et al.       Expires December 24, 2020               [Page 6]
 
 Internet-Draft         DOTS Signal Filter Control              June 2020
 
@@ -389,7 +389,7 @@ Internet-Draft         DOTS Signal Filter Control              June 2020
 
 
 
-Nishizuka, et al.       Expires December 23, 2020               [Page 7]
+Nishizuka, et al.       Expires December 24, 2020               [Page 7]
 
 Internet-Draft         DOTS Signal Filter Control              June 2020
 
@@ -445,7 +445,7 @@ Internet-Draft         DOTS Signal Filter Control              June 2020
 
 
 
-Nishizuka, et al.       Expires December 23, 2020               [Page 8]
+Nishizuka, et al.       Expires December 24, 2020               [Page 8]
 
 Internet-Draft         DOTS Signal Filter Control              June 2020
 
@@ -501,7 +501,7 @@ Internet-Draft         DOTS Signal Filter Control              June 2020
 
 
 
-Nishizuka, et al.       Expires December 23, 2020               [Page 9]
+Nishizuka, et al.       Expires December 24, 2020               [Page 9]
 
 Internet-Draft         DOTS Signal Filter Control              June 2020
 
@@ -557,7 +557,7 @@ Internet-Draft         DOTS Signal Filter Control              June 2020
 
 
 
-Nishizuka, et al.       Expires December 23, 2020              [Page 10]
+Nishizuka, et al.       Expires December 24, 2020              [Page 10]
 
 Internet-Draft         DOTS Signal Filter Control              June 2020
 
@@ -613,7 +613,7 @@ Internet-Draft         DOTS Signal Filter Control              June 2020
 
 
 
-Nishizuka, et al.       Expires December 23, 2020              [Page 11]
+Nishizuka, et al.       Expires December 24, 2020              [Page 11]
 
 Internet-Draft         DOTS Signal Filter Control              June 2020
 
@@ -669,7 +669,7 @@ Internet-Draft         DOTS Signal Filter Control              June 2020
 
 
 
-Nishizuka, et al.       Expires December 23, 2020              [Page 12]
+Nishizuka, et al.       Expires December 24, 2020              [Page 12]
 
 Internet-Draft         DOTS Signal Filter Control              June 2020
 
@@ -719,13 +719,13 @@ Internet-Draft         DOTS Signal Filter Control              June 2020
 
           Figure 2: DOTS Data Channel Request to Create a Filter
 
-   Some time later, consider that a DDoS attack is detected by the DOTS
+   Sometime later, consider that a DDoS attack is detected by the DOTS
    client on 2001:db8:6401::2/127.  Consequently, the DOTS client sends
    a mitigation request to its DOTS server as shown in Figure 3.
 
 
 
-Nishizuka, et al.       Expires December 23, 2020              [Page 13]
+Nishizuka, et al.       Expires December 24, 2020              [Page 13]
 
 Internet-Draft         DOTS Signal Filter Control              June 2020
 
@@ -781,7 +781,7 @@ Internet-Draft         DOTS Signal Filter Control              June 2020
 
 
 
-Nishizuka, et al.       Expires December 23, 2020              [Page 14]
+Nishizuka, et al.       Expires December 24, 2020              [Page 14]
 
 Internet-Draft         DOTS Signal Filter Control              June 2020
 
@@ -837,7 +837,7 @@ Internet-Draft         DOTS Signal Filter Control              June 2020
 
 
 
-Nishizuka, et al.       Expires December 23, 2020              [Page 15]
+Nishizuka, et al.       Expires December 24, 2020              [Page 15]
 
 Internet-Draft         DOTS Signal Filter Control              June 2020
 
@@ -893,7 +893,7 @@ Internet-Draft         DOTS Signal Filter Control              June 2020
 
 
 
-Nishizuka, et al.       Expires December 23, 2020              [Page 16]
+Nishizuka, et al.       Expires December 24, 2020              [Page 16]
 
 Internet-Draft         DOTS Signal Filter Control              June 2020
 
@@ -949,7 +949,7 @@ Internet-Draft         DOTS Signal Filter Control              June 2020
 
 
 
-Nishizuka, et al.       Expires December 23, 2020              [Page 17]
+Nishizuka, et al.       Expires December 24, 2020              [Page 17]
 
 Internet-Draft         DOTS Signal Filter Control              June 2020
 
@@ -1005,7 +1005,7 @@ Internet-Draft         DOTS Signal Filter Control              June 2020
 
 
 
-Nishizuka, et al.       Expires December 23, 2020              [Page 18]
+Nishizuka, et al.       Expires December 24, 2020              [Page 18]
 
 Internet-Draft         DOTS Signal Filter Control              June 2020
 
@@ -1061,7 +1061,7 @@ Internet-Draft         DOTS Signal Filter Control              June 2020
 
 
 
-Nishizuka, et al.       Expires December 23, 2020              [Page 19]
+Nishizuka, et al.       Expires December 24, 2020              [Page 19]
 
 Internet-Draft         DOTS Signal Filter Control              June 2020
 
@@ -1117,7 +1117,7 @@ Internet-Draft         DOTS Signal Filter Control              June 2020
 
 
 
-Nishizuka, et al.       Expires December 23, 2020              [Page 20]
+Nishizuka, et al.       Expires December 24, 2020              [Page 20]
 
 Internet-Draft         DOTS Signal Filter Control              June 2020
 
@@ -1173,7 +1173,7 @@ Internet-Draft         DOTS Signal Filter Control              June 2020
 
 
 
-Nishizuka, et al.       Expires December 23, 2020              [Page 21]
+Nishizuka, et al.       Expires December 24, 2020              [Page 21]
 
 Internet-Draft         DOTS Signal Filter Control              June 2020
 
@@ -1214,8 +1214,7 @@ Internet-Draft         DOTS Signal Filter Control              June 2020
 
    This specification registers the following parameters in the IANA
    "DOTS Signal Channel CBOR Key Values" registry established by
-   [RFC8782] (https://www.iana.org/assignments/dots/dots.xhtml#dots-
-   signal-channel-cbor-key-values).
+   [RFC8782] ([Key-Map]).
 
    o  Note to the RFC Editor: Please delete (TBA1-TBA2-TBA3) once the
       CBOR keys are assigned from the 1-16383 range.  Please update
@@ -1229,7 +1228,8 @@ Internet-Draft         DOTS Signal Filter Control              June 2020
 
 
 
-Nishizuka, et al.       Expires December 23, 2020              [Page 22]
+
+Nishizuka, et al.       Expires December 24, 2020              [Page 22]
 
 Internet-Draft         DOTS Signal Filter Control              June 2020
 
@@ -1285,7 +1285,7 @@ Internet-Draft         DOTS Signal Filter Control              June 2020
 
 
 
-Nishizuka, et al.       Expires December 23, 2020              [Page 23]
+Nishizuka, et al.       Expires December 24, 2020              [Page 23]
 
 Internet-Draft         DOTS Signal Filter Control              June 2020
 
@@ -1308,8 +1308,8 @@ Internet-Draft         DOTS Signal Filter Control              June 2020
 7.  Acknowledgements
 
    Many thanks to Wei Pan, Xia Liang, Jon Shallow, Dan Wing, Christer
-   Holmberg, Shawn Emery, Tim Chown, and Murray Kucherawy for the
-   comments.
+   Holmberg, Shawn Emery, Tim Chown, Murray Kucherawy, and Roman Danyliw
+   for the comments.
 
    Thanks to Benjamin Kaduk for the AD review.
 
@@ -1341,7 +1341,7 @@ Internet-Draft         DOTS Signal Filter Control              June 2020
 
 
 
-Nishizuka, et al.       Expires December 23, 2020              [Page 24]
+Nishizuka, et al.       Expires December 24, 2020              [Page 24]
 
 Internet-Draft         DOTS Signal Filter Control              June 2020
 
@@ -1371,6 +1371,10 @@ Internet-Draft         DOTS Signal Filter Control              June 2020
               slides-103-dots-interop-report-from-ietf-103-hackathon-
               00>.
 
+   [Key-Map]  IANA, "DOTS Signal Channel CBOR Key Values",
+              <https://www.iana.org/assignments/dots/dots.xhtml#dots-
+              signal-channel-cbor-key-values>.
+
    [RFC7951]  Lhotka, L., "JSON Encoding of Data Modeled with YANG",
               RFC 7951, DOI 10.17487/RFC7951, August 2016,
               <https://www.rfc-editor.org/info/rfc7951>.
@@ -1386,6 +1390,18 @@ Internet-Draft         DOTS Signal Filter Control              June 2020
 
 Authors' Addresses
 
+
+
+
+
+
+
+
+Nishizuka, et al.       Expires December 24, 2020              [Page 25]
+
+Internet-Draft         DOTS Signal Filter Control              June 2020
+
+
    Kaname Nishizuka
    NTT Communications
    GranPark 16F 3-4-1 Shibaura, Minato-ku
@@ -1393,13 +1409,6 @@ Authors' Addresses
    Japan
 
    Email: kaname@nttv6.jp
-
-
-
-
-Nishizuka, et al.       Expires December 23, 2020              [Page 25]
-
-Internet-Draft         DOTS Signal Filter Control              June 2020
 
 
    Mohamed Boucadair
@@ -1444,13 +1453,4 @@ Internet-Draft         DOTS Signal Filter Control              June 2020
 
 
 
-
-
-
-
-
-
-
-
-
-Nishizuka, et al.       Expires December 23, 2020              [Page 26]
+Nishizuka, et al.       Expires December 24, 2020              [Page 26]

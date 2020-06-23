@@ -201,7 +201,7 @@
         attacking the target. For example, an attacker can spoof the IP
         addresses of accept-listed sources to generate attack traffic or the
         attacker can compromise the accept-listed sources and program them to
-        launch a DDoS attack. </t>
+        launch a DDoS attack.</t>
 
         <t><xref target="RFC8782"></xref> is designed so that the DDoS server
         notifies the above conflict to the DOTS client (that is,
@@ -684,9 +684,9 @@ Content-Type: application/yang-data+json
 }]]></artwork>
           </figure></t>
 
-        <t>Some time later, consider that a DDoS attack is detected by the
-        DOTS client on 2001:db8:6401::2/127. Consequently, the DOTS client
-        sends a mitigation request to its DOTS server as shown in <xref
+        <t>Sometime later, consider that a DDoS attack is detected by the DOTS
+        client on 2001:db8:6401::2/127. Consequently, the DOTS client sends a
+        mitigation request to its DOTS server as shown in <xref
         target="mitigate"></xref>.</t>
 
         <t><figure anchor="mitigate"
@@ -1098,8 +1098,7 @@ Content-Format: "application/dots+cbor"
       <section anchor="map" title="DOTS Signal Channel CBOR Mappings Registry">
         <t>This specification registers the following parameters in the IANA
         "DOTS Signal Channel CBOR Key Values" registry established by <xref
-        target="RFC8782"></xref>
-        (https://www.iana.org/assignments/dots/dots.xhtml#dots-signal-channel-cbor-key-values).</t>
+        target="RFC8782"></xref> (<xref target="Key-Map"></xref>).</t>
 
         <t><list style="symbols">
             <t>Note to the RFC Editor: Please delete (TBA1-TBA2-TBA3) once the
@@ -1187,8 +1186,8 @@ Content-Format: "application/dots+cbor"
 
     <section anchor="ack" title="Acknowledgements">
       <t>Many thanks to Wei Pan, Xia Liang, Jon Shallow, Dan Wing, Christer
-      Holmberg, Shawn Emery, Tim Chown, and Murray Kucherawy for the
-      comments.</t>
+      Holmberg, Shawn Emery, Tim Chown, Murray Kucherawy, and Roman Danyliw
+      for the comments.</t>
 
       <t>Thanks to Benjamin Kaduk for the AD review.</t>
     </section>
@@ -1299,6 +1298,19 @@ Content-Format: "application/dots+cbor"
           </author>
 
           <date month="November" year="2018" />
+        </front>
+      </reference>
+
+      <reference anchor="Key-Map"
+                 target="https://www.iana.org/assignments/dots/dots.xhtml#dots-signal-channel-cbor-key-values">
+        <front>
+          <title>DOTS Signal Channel CBOR Key Values</title>
+
+          <author fullname="IANA">
+            <organization></organization>
+          </author>
+
+          <date />
         </front>
       </reference>
     </references>
