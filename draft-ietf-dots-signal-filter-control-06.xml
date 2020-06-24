@@ -1168,7 +1168,7 @@ Content-Format: "application/dots+cbor"
       creating filters that will be activated on demand when an attack is
       detected.</t>
 
-      <t>A DOTS client is entitled to access only resources it creates. In
+      <t>A DOTS client is entitled to access only the resources it creates. In
       particular, a DOTS client can not tweak filtering rules created by other
       DOTS clients of the same DOTS client domain. As a reminder, DOTS servers
       must associate filtering rules with the DOTS client that created these
@@ -1186,8 +1186,8 @@ Content-Format: "application/dots+cbor"
 
     <section anchor="ack" title="Acknowledgements">
       <t>Many thanks to Wei Pan, Xia Liang, Jon Shallow, Dan Wing, Christer
-      Holmberg, Shawn Emery, Tim Chown, Murray Kucherawy, and Roman Danyliw
-      for the comments.</t>
+      Holmberg, Shawn Emery, Tim Chown, Murray Kucherawy, Roman Danyliw, and
+      Erik Kline for the comments.</t>
 
       <t>Thanks to Benjamin Kaduk for the AD review.</t>
     </section>
