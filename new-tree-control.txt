@@ -1,0 +1,7 @@
+module: ietf-dots-signal-control
+
+  augment-structure /ietf-signal:dots-signal/ietf-signal:message-type/ietf-signal:mitigation-scope/ietf-signal:scope:
+    +-- acl-list* [acl-name]
+       +-- acl-name
+       |       -> /ietf-data:dots-data/dots-client/acls/acl/name
+       +-- activation-type?   ietf-data:activation-type
